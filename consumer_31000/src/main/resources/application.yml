@@ -1,0 +1,14 @@
+server:
+  port: 31000
+spring:
+  application:
+    name: "Consumer"
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+  client:
+    service-url:
+      defaultZone: "http://eureka28000:28000/eureka,http://eureka28001:28001/eureka"

@@ -1,0 +1,12 @@
+server:
+  port: 28001
+eureka:
+  instance:
+    hostname: "eureka28001"
+  client:
+    service-url:
+      defaultZone: "http://eureka28000:28000/eureka/"
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+    enable-self-preservation: false
