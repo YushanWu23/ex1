@@ -12,3 +12,31 @@ eureka:
   client:
     service-url:
       defaultZone: "http://eureka28000:28000/eureka,http://eureka28001:28001/eureka"
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: TIME_BASED
+        waitDurationInOpenState: 5s
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+    instances:
+      circuitBreakerA:
+        failureRateThreshold: 30
+      circuitBreakerB:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 30
+        slowCallDurationThreshold: 2s
+  bulkhead:
+    instances:
+      bulkheadC:
+        maxConcurrentCalls: 10
+        maxWaitDuration: 20ms
+  ratelimiter:
+    instances:
+      rateLimiterD:
+        limitForPeriod: 5
+        limitRefreshPeriod: 2s
+        timeoutDuration: 20ms

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @FeignClient("Provider")
 //@LoadBalancerClient
-@LoadBalancerClient(name = "Provider",configuration =NumberLoadBalancer.class)
+//@LoadBalancerClient(name = "Provider",configuration =NumberLoadBalancer.class)
 public interface NumberFeignClient {
     @GetMapping("/calculate/add")
     public CommonResult<Integer> add(@RequestParam(value = "a") Integer a,@RequestParam(value = "b") Integer b);

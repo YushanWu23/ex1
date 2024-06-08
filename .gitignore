@@ -1,0 +1,7 @@
+# 项目排除路径
+/consumer_30000/target/
+/consumer_31000/target/
+/eureka_28000/target/
+/eureka_28001/target/
+/provider_10000/target/
+/provider_11000/target/
