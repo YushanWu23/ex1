@@ -1,8 +1,25 @@
 server:
-  port: 31000
+  port: 61000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh
 spring:
   application:
-    name: "Consumer"
+    name: config-server
+  rabbitmq:
+    stream:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/YushanWu23/configs.git
+
 eureka:
   instance:
     prefer-ip-address: true

@@ -1,8 +1,15 @@
 server:
-  port: 11000
+  port: 60000
+
 spring:
   application:
-    name: "Provider"
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/YushanWu23/configs.git
+
 eureka:
   instance:
     prefer-ip-address: true

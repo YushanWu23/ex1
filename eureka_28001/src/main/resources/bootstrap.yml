@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: eureka28001
+      profile: dev
+      label: main
+      uri: http://localhost:60000
