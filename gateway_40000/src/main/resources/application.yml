@@ -3,6 +3,28 @@ server:
 spring:
   application:
     name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: Consumer
+          uri: lb://Consumer
+          predicates:
+            - Path=/user/signIn
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: circuitBreakerA
+                fallbackUri: forward:/fallback/circuitBreakerA
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              -GET
+              -POST
+              -PUT
+              -DELETE
+            allowedHeaders: "*"
 eureka:
   instance:
     prefer-ip-address: true
@@ -12,4 +34,16 @@ eureka:
   client:
     service-url:
       defaultZone: "http://eureka28000:28000/eureka,http://eureka28001:28001/eureka"
-
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: TIME_BASED
+        waitDurationInOpenState: 5s
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+      instances:
+        circuitBreakerA:
+          failureRateThreshold: 30
